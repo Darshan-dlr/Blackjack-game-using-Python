@@ -1,15 +1,10 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import random
 suits=("hearts","diamonds","spades","clubs")
 ranks=("two","three","four","five","six","seven","eight","nine","ten","jack","queen","king","ace")
 values={"two":2,"three":3,"four":4,"five":5,"six":6,"seven":7,"eight":8,"nine":9,"ten":10,"jack":10,"queen":10,"king":10,"ace":11}
 playing =True
 
+# class for Cards
 class Card:
     def __init__(self,suit,rank):
         self.suit=suit
@@ -17,19 +12,8 @@ class Card:
         
     def __str__(self):
         return self.rank + " of " +self.suit
-    
 
-
-# In[2]:
-
-
-d=Card("two","hearts")
-print(d)
-
-
-# In[3]:
-
-
+ #Class for Deck
 class Deck:
     def __init__(self):
         self.deck=[]
@@ -51,10 +35,7 @@ class Deck:
         single_card=self.deck.pop()
         return single_card
 
-
-# In[4]:
-
-
+#class for Hand
 class Hand:
     def __init__(self):
         self.cards=[]
@@ -75,18 +56,7 @@ class Hand:
                 self.value -=10
                 self.aces-=1
                 
-
-
-# In[5]:
-
-
-test_deck=Deck()
-print(test_deck.deal())
-
-
-# In[6]:
-
-
+#class for Chips for consedring bet
 class Chips:
     def __init__(self,total=100):
         self.total=total
@@ -99,11 +69,7 @@ class Chips:
        
     def lose_bet (self):
         self.total -=self.bet
-
-
-# In[7]:
-
-
+#function that take input to place the bet & check wheter it is valid or not interms of integer and chips user has
 def take_bet(chips):
     while True:
         try:
@@ -117,21 +83,13 @@ def take_bet(chips):
                 print("sorry you dont have enough chips,you have: {}",format(chips.total))
             else:
                 break
-
-
-# In[8]:
-
-
+                
+#class deck
 def hit(deck,hand):
     single_card=deck.deal()
     hand.add_cards(single_card)
     hand.adjust_for_ace()
-    
-
-
-# In[9]:
-
-
+#function for hit or stand    
 def hit_or_stand(deck,hand):
     global playing
     while True:
@@ -149,16 +107,8 @@ def hit_or_stand(deck,hand):
             continue
            
         break
-
-
-# In[10]:
-
-
-
-
-
-
-
+        
+#function to diplay the card of player and dealer
 def show_some(player,dealer):
     print("\nDealer hand:")
     print("<card hidden>")
@@ -170,10 +120,7 @@ def show_all(player,dealer):
     print('\n players hand:',*player.cards,sep='\n')
     print('\n players hand:',player.value)
 
-
-# In[11]:
-
-
+    
 def player_busts(player,dealer,chips):
     print("bust player")
     chips.lose_bet()
@@ -193,9 +140,7 @@ def dealer_wins(player,dealer,chips):
 def push(player,dealer):
     print("dealer and player tie!push")
 
-
-# In[15]:
-
+#Game logic
 
 while True:
     print('welcome to blacjack')
@@ -252,16 +197,3 @@ while True:
     else:
         print('thank you for playing')
         break
-
-
-# In[13]:
-
-
-h
-
-
-# In[ ]:
-
-
-
-
